@@ -1,0 +1,800 @@
+/* ===========================================================================
+   Horizonte Visão
+   Precisão óptica. Branco, grafite e um teal profundo. Nada de azul
+   hospitalar. Anéis concêntricos usados como marcador de foco, com função.
+   =========================================================================== */
+
+:root {
+  --branco: #ffffff;
+  --neve: #f7f9f8;
+  --grafite: #1c1f1e;
+  --grafite-suave: #474d4b;
+  --grafite-tenue: #636a68;
+  --teal: #1f6655;
+  --teal-claro: #2e8b74;
+  --teal-tenue: #e4efeb;
+  --ambar: #b8841f;
+  --linha: #dfe4e2;
+  --linha-forte: #c3ccc8;
+
+  --fonte: 'Manrope', system-ui, -apple-system, sans-serif;
+  --gutter: clamp(20px, 4.5vw, 72px);
+  --max: 1200px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--branco);
+  color: var(--grafite);
+  font-family: var(--fonte);
+  font-size: 16.5px;
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 3px solid var(--teal);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.pular {
+  position: absolute;
+  left: -9999px;
+  background: var(--grafite);
+  color: var(--branco);
+  padding: 12px 18px;
+  z-index: 100;
+}
+
+.pular:focus {
+  left: 8px;
+  top: 8px;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 700;
+  letter-spacing: -0.028em;
+  line-height: 1.12;
+}
+
+/* ------------------------------------------------------------------- topo */
+
+.topo {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--linha);
+}
+
+.topo-interno {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  height: 66px;
+  display: flex;
+  align-items: center;
+  gap: 26px;
+}
+
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--grafite);
+  margin-right: auto;
+}
+
+.marca-texto {
+  font-weight: 800;
+  font-size: 18px;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.marca-texto em {
+  font-style: normal;
+  color: var(--teal);
+}
+
+.marca-descritor {
+  display: block;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--grafite-tenue);
+  margin-top: 2px;
+}
+
+.nav-topo {
+  display: flex;
+  gap: 26px;
+}
+
+.nav-topo a {
+  color: var(--grafite-suave);
+  text-decoration: none;
+  font-size: 14.5px;
+  font-weight: 500;
+  white-space: nowrap;
+  padding: 4px 0;
+  border-bottom: 2px solid transparent;
+}
+
+.nav-topo a:hover {
+  color: var(--teal);
+  border-bottom-color: var(--teal);
+}
+
+.menu-botao {
+  display: none;
+  background: none;
+  border: 1px solid var(--linha-forte);
+  border-radius: 6px;
+  padding: 9px 15px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.menu-movel {
+  display: none;
+  background: var(--neve);
+  border-bottom: 1px solid var(--linha);
+  padding: 4px var(--gutter) 18px;
+}
+
+.menu-movel.aberto {
+  display: block;
+}
+
+.menu-movel a {
+  display: block;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--linha);
+  color: var(--grafite);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* ------------------------------------------------------------------ botões */
+
+.botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  background: var(--teal);
+  color: var(--branco);
+  border: 2px solid var(--teal);
+  border-radius: 7px;
+  text-decoration: none;
+  padding: 13px 26px;
+  font-size: 15.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.botao:hover {
+  background: #185244;
+  border-color: #185244;
+}
+
+.botao-vazado {
+  background: transparent;
+  color: var(--teal);
+}
+
+.botao-vazado:hover {
+  background: var(--teal);
+  color: var(--branco);
+}
+
+.botao-claro {
+  background: var(--branco);
+  color: var(--teal);
+  border-color: var(--branco);
+}
+
+.botao-claro:hover {
+  background: var(--teal-tenue);
+  border-color: var(--teal-tenue);
+}
+
+/* --------------------------------------------------------------- abertura */
+
+.abertura {
+  border-bottom: 1px solid var(--linha);
+  overflow: hidden;
+}
+
+.abertura-grade {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: clamp(52px, 7vw, 92px) var(--gutter);
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+  gap: clamp(32px, 5vw, 72px);
+  align-items: center;
+}
+
+.medida {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 20px;
+}
+
+.medida::before {
+  content: '';
+  width: 26px;
+  height: 2px;
+  background: var(--teal);
+}
+
+.abertura h1 {
+  font-size: clamp(31px, 4.3vw, 54px);
+  max-width: 17ch;
+}
+
+.abertura-texto {
+  margin-top: 20px;
+  color: var(--grafite-suave);
+  max-width: 52ch;
+  font-size: clamp(16px, 1.2vw, 17.5px);
+}
+
+.abertura-acao {
+  margin-top: 30px;
+}
+
+.abertura-figura svg {
+  width: 100%;
+  height: auto;
+  max-width: 380px;
+  margin-inline: auto;
+  display: block;
+}
+
+.figura-legenda {
+  margin-top: 14px;
+  font-size: 12.5px;
+  color: var(--grafite-tenue);
+  text-align: center;
+  max-width: 36ch;
+  margin-inline: auto;
+}
+
+/* ----------------------------------------------------------------- seções */
+
+.secao {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: clamp(56px, 7.5vw, 100px) var(--gutter);
+}
+
+.secao-neve {
+  background: var(--neve);
+  max-width: none;
+  border-block: 1px solid var(--linha);
+}
+
+.secao-escura {
+  background: var(--grafite);
+  color: #d4dad8;
+  max-width: none;
+}
+
+.secao-neve .interno,
+.secao-escura .interno {
+  max-width: var(--max);
+  margin: 0 auto;
+}
+
+.secao-escura h2,
+.secao-escura h3 {
+  color: var(--branco);
+}
+
+.cabeca {
+  max-width: 720px;
+  margin-bottom: 44px;
+}
+
+.cabeca h2 {
+  font-size: clamp(26px, 3.3vw, 40px);
+}
+
+.cabeca p {
+  margin-top: 15px;
+  color: var(--grafite-suave);
+  max-width: 62ch;
+}
+
+.secao-escura .cabeca p {
+  color: #a8b2af;
+}
+
+/* ------------------------------------------------------------ atendimentos */
+
+.atendimentos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(292px, 1fr));
+  gap: 30px 36px;
+}
+
+.atendimento {
+  padding-top: 18px;
+  border-top: 2px solid var(--teal);
+}
+
+.atendimento h3 {
+  font-size: 18.5px;
+}
+
+.atendimento p {
+  margin-top: 9px;
+  color: var(--grafite-suave);
+  font-size: 15.5px;
+}
+
+/* -------------------------------------------------------------- refrativa */
+
+.criterios {
+  display: grid;
+  gap: 2px;
+  background: var(--linha);
+  border: 1px solid var(--linha);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.criterio {
+  background: var(--branco);
+  padding: 22px 26px;
+  display: grid;
+  grid-template-columns: 36px minmax(0, 0.34fr) minmax(0, 0.66fr);
+  gap: 22px;
+  align-items: start;
+}
+
+.criterio-marca {
+  width: 24px;
+  height: 24px;
+  margin-top: 2px;
+}
+
+.criterio h3 {
+  font-size: 17px;
+}
+
+.criterio p {
+  color: var(--grafite-suave);
+  font-size: 15.5px;
+}
+
+.aviso-destaque {
+  margin-top: 28px;
+  background: var(--teal-tenue);
+  border-left: 4px solid var(--teal);
+  border-radius: 0 8px 8px 0;
+  padding: 20px 24px;
+  color: #14473b;
+  font-size: 16px;
+  max-width: 76ch;
+}
+
+/* ------------------------------------------------------------------ jornada */
+
+.passos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 1px;
+  background: #343a38;
+  border: 1px solid #343a38;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.passo {
+  background: var(--grafite);
+  padding: 26px 22px 30px;
+}
+
+.passo-numero {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--teal-claro);
+  letter-spacing: 0.04em;
+  margin-bottom: 14px;
+}
+
+.passo h3 {
+  font-size: 17.5px;
+}
+
+.passo-tempo {
+  margin-top: 5px;
+  font-size: 12.5px;
+  color: var(--ambar);
+  font-weight: 600;
+}
+
+.passo p {
+  margin-top: 11px;
+  font-size: 14.5px;
+  color: #a8b2af;
+}
+
+/* --------------------------------------------------------------- tecnologia */
+
+.exames {
+  display: grid;
+  gap: 18px;
+}
+
+.exame {
+  display: grid;
+  grid-template-columns: minmax(0, 0.3fr) minmax(0, 0.7fr);
+  gap: 28px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--linha);
+  align-items: start;
+}
+
+.exame h3 {
+  font-size: 17.5px;
+}
+
+.exame-pergunta {
+  font-size: 16.5px;
+  font-weight: 700;
+  color: var(--teal);
+  margin-bottom: 7px;
+}
+
+.exame p {
+  color: var(--grafite-suave);
+  font-size: 15.5px;
+}
+
+/* ------------------------------------------------------------------ dúvidas */
+
+.duvidas {
+  border-top: 1px solid var(--linha-forte);
+  max-width: 880px;
+}
+
+.duvida {
+  border-bottom: 1px solid var(--linha);
+}
+
+.duvida-botao {
+  width: 100%;
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 20px 0;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: 1fr 28px;
+  gap: 16px;
+  align-items: center;
+  font-size: 17.5px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--grafite);
+}
+
+.duvida-botao:hover {
+  color: var(--teal);
+}
+
+.sinal {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2px solid var(--linha-forte);
+  display: grid;
+  place-items: center;
+  font-size: 15px;
+  line-height: 1;
+  color: var(--teal);
+}
+
+.duvida-botao[aria-expanded='true'] .sinal {
+  background: var(--teal);
+  border-color: var(--teal);
+  color: var(--branco);
+}
+
+.duvida-resposta {
+  padding-bottom: 22px;
+  color: var(--grafite-suave);
+  max-width: 70ch;
+  font-size: 16px;
+}
+
+/* --------------------------------------------------------------- formulário */
+
+.form-grade {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 56px;
+  align-items: start;
+}
+
+.form-lateral p {
+  color: var(--grafite-suave);
+  max-width: 42ch;
+}
+
+.form-lateral p + p {
+  margin-top: 14px;
+}
+
+.form-lista {
+  margin-top: 24px;
+  list-style: none;
+  display: grid;
+  gap: 11px;
+}
+
+.form-lista li {
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  gap: 10px;
+  font-size: 15px;
+  color: var(--grafite-suave);
+}
+
+.formulario {
+  background: var(--branco);
+  border: 1px solid var(--linha-forte);
+  border-radius: 12px;
+  padding: clamp(24px, 3vw, 34px);
+  display: grid;
+  gap: 18px;
+}
+
+.campo label {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 700;
+  margin-bottom: 7px;
+}
+
+.obrigatorio {
+  font-weight: 500;
+  color: #9a4a2c;
+}
+
+.entrada {
+  width: 100%;
+  border: 1px solid var(--linha-forte);
+  border-radius: 7px;
+  background: var(--branco);
+  padding: 12px 13px;
+  font-size: 16px;
+}
+
+textarea.entrada {
+  min-height: 100px;
+  resize: vertical;
+  line-height: 1.55;
+}
+
+.entrada:hover {
+  border-color: var(--grafite-tenue);
+}
+
+.entrada:focus {
+  outline: 3px solid var(--teal);
+  outline-offset: 1px;
+  border-color: var(--teal);
+}
+
+.entrada[aria-invalid='true'] {
+  border-color: #9a4a2c;
+  border-width: 2px;
+}
+
+.erro-campo {
+  margin-top: 6px;
+  font-size: 13.5px;
+  color: #8a4226;
+  font-weight: 600;
+}
+
+.dupla {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.form-nota {
+  font-size: 13px;
+  color: var(--grafite-tenue);
+}
+
+.confirmacao {
+  background: var(--teal-tenue);
+  border: 2px solid var(--teal);
+  border-radius: 12px;
+  padding: clamp(24px, 3vw, 34px);
+}
+
+.confirmacao h3 {
+  font-size: 21px;
+  color: #14473b;
+}
+
+.confirmacao p {
+  margin-top: 12px;
+  color: #235e4f;
+  font-size: 15.5px;
+}
+
+.confirmacao-dados {
+  margin-top: 18px;
+  padding-top: 15px;
+  border-top: 1px solid #b6d3c9;
+  display: grid;
+  gap: 5px;
+  font-size: 14px;
+  color: #2d6557;
+}
+
+/* ------------------------------------------------------------------ rodapé */
+
+.rodape {
+  background: var(--grafite);
+  color: #9aa4a1;
+  padding: 50px var(--gutter) 58px;
+  font-size: 13.5px;
+}
+
+.rodape-interno {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: grid;
+  gap: 20px;
+}
+
+.rodape-marca {
+  color: var(--branco);
+  font-weight: 800;
+  font-size: 19px;
+  letter-spacing: -0.03em;
+}
+
+.rodape p {
+  max-width: 80ch;
+  line-height: 1.65;
+}
+
+/* ------------------------------------------------------------- responsivo */
+
+@media (max-width: 1000px) {
+  .nav-topo {
+    display: none;
+  }
+
+  .menu-botao {
+    display: block;
+  }
+
+  .topo-interno > .botao {
+    display: none;
+  }
+
+  .abertura-grade {
+    grid-template-columns: 1fr;
+  }
+
+  .abertura-figura {
+    order: -1;
+  }
+
+  .abertura-figura svg {
+    max-width: 260px;
+  }
+
+  .form-grade {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+}
+
+@media (max-width: 640px) {
+  .criterio {
+    grid-template-columns: 28px minmax(0, 1fr);
+    gap: 14px;
+    padding: 20px;
+  }
+
+  .criterio p {
+    grid-column: 2;
+  }
+
+  .exame {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .dupla {
+    grid-template-columns: 1fr;
+  }
+
+  .marca-descritor {
+    display: none;
+  }
+}
+
+/* ------------------------------------------------- chamada fixa no celular */
+
+.acao-fixa {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  .acao-fixa {
+    display: block;
+    position: fixed;
+    inset: auto 0 0 0;
+    padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+    background: rgba(255, 255, 255, 0.97);
+    border-top: 1px solid var(--linha-forte);
+    z-index: 45;
+  }
+
+  .acao-fixa .botao {
+    width: 100%;
+  }
+
+  .rodape {
+    padding-bottom: 100px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
